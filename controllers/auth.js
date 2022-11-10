@@ -24,9 +24,12 @@ const registerCtrl = async (req, res) => {
             user: dataUser,
         }
 
+        console.log(data);
+
         res.send({data});
     } catch (e) {
         handleHttpError(res, "ERROR REGISTER USER");
+        console.log(e);
     }
 }
 
