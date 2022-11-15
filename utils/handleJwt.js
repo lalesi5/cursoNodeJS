@@ -10,7 +10,7 @@ const propertiesKey = getProperties()
 
 const tokenSign = async (user) => {
     return await jwt.sign({
-            [propertiesKey.data.id]: user[propertiesKey.data.id],
+            _id: user._id,
             role: user.role
         },
         JWT_SECRET,

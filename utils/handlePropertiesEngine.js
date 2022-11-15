@@ -3,10 +3,10 @@ const ENGINE_DB = process.env.DB_ENGINE;
 const getProperties = () => {
     const data = {
         nosql:{
-            id:'id'
+            id:'_id'
         },
         mysql:{
-            id:'_id'
+            id:'id'
         }
     }
     return data[ENGINE_DB]

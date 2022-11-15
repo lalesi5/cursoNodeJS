@@ -24,7 +24,7 @@ const registerCtrl = async (req, res) => {
             user: dataUser,
         }
 
-        console.log(data);
+        //console.log(data);
 
         res.send({data});
     } catch (e) {
@@ -58,6 +58,7 @@ const loginCtrl = async (req, res) => {
         res.send({data});
 
     } catch (e) {
+        console.log(e);
         handleHttpError(res, "ERROR_LOGIN_USER");
     }
 }
