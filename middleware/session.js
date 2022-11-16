@@ -11,12 +11,20 @@ const authMiddleware = async (req, res, next) => {
 
         const token = req.headers.authorization.split(' ').pop();
         const tokenData = await verifyToken(token);
-        if (tokenData._id) {
-            req.user = await userModel.findById(tokenData._id);
-            next();
-        } else {
-            handleHttpError(res, "NOT_ALLOW", 409);
+
+
+        if (!tokenData) {
+            handleHttpError(res, "NOT_PAYLOAD_DATA", 401);
+            return
         }
+
+        const query = {
+            id: tokenData.id
+        }
+
+        req.user = await userModel.findOne(query);
+        next();
+
 
     } catch (e) {
         handleHttpError(res, "NOT_SESSION", 401);

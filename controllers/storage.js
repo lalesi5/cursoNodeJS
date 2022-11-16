@@ -13,7 +13,7 @@ const MEDIA_PATH = `${__dirname}/../storage`;
 
 const getItems = async (req, res) => {
     try {
-        const data = await storageModel.find({});
+        const data = await storageModel.findAll({});
         res.send({data})
     } catch (e) {
         handleHttpError(res, 'ERROR_LIST_ITEMS');
@@ -27,7 +27,7 @@ const getItems = async (req, res) => {
 const getItem = async (req, res) => {
     try {
         const {id} = matchedData(req)
-        const data = await storageModel.findById(id);
+        const data = await storageModel.findOne(id);
         res.send({data})
     } catch (e) {
         handleHttpError(res, 'ERROR_DETAIL_ITEMS');
@@ -49,6 +49,7 @@ const createItem = async (req, res) => {
         const data = await storageModel.create(fileData)
         res.send({data})
     } catch (e) {
+        console.log(e);
         handleHttpError(res, 'ERROR_CREATE_ITEMS');
     }
 };
@@ -62,7 +63,7 @@ const deleteItem = async (req, res) => {
 
     try {
         const {id} = matchedData(req)
-        const dataFile = await storageModel.findById(id);
+        const dataFile = await storageModel.findOne(id);
         //await storageModel.deleteOne(id) *
         await storageModel.delete({_id: id})
         const {filename} = dataFile;
